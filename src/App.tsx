@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "./Router";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <main className="c-main">
       <Router />
