@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
-import { userState } from "../store/types";
+import { usersState } from "../store/types";
 
-const usersSelector = (state: any): userState => {
+const usersSelector = (state: any): usersState => {
   console.log(state);
   return state.users;
 };

@@ -1,6 +1,6 @@
-import { userState } from "./types";
+import { usersState } from "../store/types";
 export const SIGN_IN = "SIGN_IN";
-export const signInAction = (userState: userState) => {
+export const signInAction = (userState: usersState) => {
   return {
     type: "SIGN_IN",
     payload: userState,

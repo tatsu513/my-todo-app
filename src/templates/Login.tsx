@@ -1,23 +1,23 @@
 import React from "react";
 import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
-import { signInAction } from "../reducks/users/actions";
+import { SignIn } from "../reducks/users/operations";
 
-const SignIn: React.FC = () => {
+const Login: React.FC = () => {
   const dispatch = useDispatch();
   return (
     <div>
       <h2>サインイン</h2>
       <button
         onClick={() => {
-          dispatch(signInAction({ uid: "000001", userName: "taro" }));
+          dispatch(SignIn("000001", "taro"));
           dispatch(push("/"));
         }}
       >
-        ホームへ
+        ログイン
       </button>
     </div>
   );
 };
 
-export default SignIn;
+export default Login;
