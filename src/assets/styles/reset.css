@@ -134,6 +134,9 @@ input[type="text"] {
   border-radius: 0;
   outline: none;
 }
+button {
+  outline: none;
+}
 
 * {
   box-sizing: border-box;

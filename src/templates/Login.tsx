@@ -5,7 +5,7 @@ import { SignIn } from "../reducks/users/operations";
 import backgroundImage from "../assets/images/login-back.png";
 import styled from "styled-components";
 import { TextInput } from "../components/UIkit";
-import {} from "../components/UIkit";
+import { Button } from "../components/UIkit";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const Login: React.FC = () => {
         <LoginTitle>Login</LoginTitle>
         <TextInput label={"email"} />
         <TextInput label={"password"} />
+        <Button label={"Login"} />
       </SigninContainer>
     </SigninBox>
   );

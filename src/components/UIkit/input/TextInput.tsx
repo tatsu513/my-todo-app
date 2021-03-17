@@ -13,11 +13,11 @@ const TextInput: React.FC<Props> = (props) => {
   );
 };
 
-const InputWrap = styled.div({
-  marginBottom: 16,
-  width: "100%",
-  position: "relative",
-});
+const InputWrap = styled.div`
+  margin-bottom: 16px;
+  width: 100%;
+  position: relative;
+`;
 
 const Input = styled.input`
   height: 40px;
