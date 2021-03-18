@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { SignIn } from "../reducks/users/operations";
+import { SignIn, SignWithGoogle } from "../reducks/users/operations";
 import styled from "styled-components";
-import { TextInput, Button, TextLink } from "../components/UIkit";
+import { TextInput, Button, TextLink } from "./UIkit";
 import { push } from "connected-react-router";
 
 const Login: React.FC = () => {
@@ -29,14 +29,9 @@ const Login: React.FC = () => {
       <h2 className="login-title">Login</h2>
       <Button
         label={"Login with Google"}
-        action={() => alert("google")}
+        action={() => dispatch(SignWithGoogle())}
       />
-      <p
-        className="separator-text"
-        onClick={() => dispatch(SignIn("ooooo", "iiiiii"))}
-      >
-        or
-      </p>
+      <p className="separator-text">or</p>
       <TextInput
         label={"email"}
         value={email}

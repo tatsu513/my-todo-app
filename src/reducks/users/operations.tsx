@@ -1,6 +1,6 @@
 import { signInAction } from "./actions";
 import { push } from "connected-react-router";
-import { auth, db, FirebaseTimetamp } from "../../firebase";
+import { auth, db, FirebaseTimetamp, provider } from "../../firebase";
 import { Dispatch } from "redux";
 
 export const SignIn = (email: string, password: string) => {
@@ -39,6 +39,29 @@ export const SignIn = (email: string, password: string) => {
   };
 };
 
+export const SignWithGoogle = () => {
+  return async (dispatch: Dispatch) => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+
+        if (user) {
+          dispatch(
+            signInAction({
+              isSignedIn: true,
+              role: "customer",
+              uid: user.uid,
+              userName: user.displayName || "",
+            })
+          );
+        }
+        dispatch(push("/"));
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
 export const signup = (
   username: string,
   email: string,
@@ -46,7 +69,6 @@ export const signup = (
   confirmPassword: string
 ) => {
   return async (dispatch: Dispatch) => {
-    console.log(dispatch);
     if (
       username === "" ||
       email === "" ||
