@@ -3,7 +3,12 @@ export const SIGN_IN = "SIGN_IN";
 export const signInAction = (userState: usersState) => {
   return {
     type: "SIGN_IN",
-    payload: userState,
+    payload: {
+      isSignedIn: true,
+      role: userState.role,
+      uid: userState.uid,
+      userName: userState.userName,
+    },
   };
 };
 

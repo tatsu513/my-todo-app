@@ -6,4 +6,5 @@ export type usersState = {
   isSignedIn: boolean;
   uid: string;
   userName: string;
+  role: string;
 };
