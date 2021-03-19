@@ -1,3 +1,4 @@
+import { push } from "connected-react-router";
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -72,7 +73,10 @@ const SignUp: React.FC = () => {
       />
       <div className="sub-menu">
         <TextLink text={""} action={() => alert("いいい")} />
-        <TextLink text={"Signin"} action={() => alert("いいい")} />
+        <TextLink
+          text={"Signin"}
+          action={() => dispatch(push("/signin"))}
+        />
       </div>
     </SignupContainer>
   );

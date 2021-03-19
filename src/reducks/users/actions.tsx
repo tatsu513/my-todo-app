@@ -16,6 +16,11 @@ export const SIGN_OUT = "SIGN_OUT";
 export const signOutAction = () => {
   return {
     type: "SIGN_OUT",
-    payload: null,
+    payload: {
+      isSignedIn: true,
+      role: "",
+      uid: "",
+      userName: "",
+    },
   };
 };

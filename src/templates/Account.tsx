@@ -1,19 +1,32 @@
-import React from "react";
-import { SignIn, SignUp } from "../components/";
+import React, { useEffect, useState } from "react";
+import { Reset, SignIn, SignUp } from "../components/";
 import styled from "styled-components";
 import backgroundImage from "../assets/images/login-back.png";
 
-const pathname = window.location.pathname;
-const IsSignIn = pathname.split("/")[1] === "signin";
-
 const Account: React.FC = () => {
+  const pathname = window.location.pathname;
+  const [isSignIn, setIsSingIn] = useState(true);
+  const [path, setPath] = useState("signin");
+
+  useEffect(() => {
+    setIsSingIn(
+      pathname.split("/")[1].match(/^signin(#)?/) ? true : false
+    );
+  }, [pathname]);
+
+  useEffect(() => {
+    setPath(pathname.split("/")[1].replace("#", ""));
+  }, [pathname]);
   return (
     <AccountWrap
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="overlay" />
       <div className="container">
-        {IsSignIn ? <SignIn /> : <SignUp />}
+        {path === "signin" && <SignIn />}
+        {path === "signup" && <SignUp />}
+        {path === "reset" && <Reset />}
+        {/* {isSignIn ? <SignIn /> : <SignUp />} */}
       </div>
     </AccountWrap>
   );

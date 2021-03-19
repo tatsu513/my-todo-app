@@ -6,7 +6,10 @@ type Action = {
   payload: {};
 };
 
-export const UsersReducer = (state = initialState.users, action: Action) => {
+export const UsersReducer = (
+  state = initialState.users,
+  action: Action
+) => {
   switch (action.type) {
     case Actions.SIGN_IN:
       return {
@@ -15,7 +18,7 @@ export const UsersReducer = (state = initialState.users, action: Action) => {
       };
     case Actions.SIGN_OUT:
       return {
-        ...initialState.users,
+        ...action.payload,
       };
     default:
       return state;

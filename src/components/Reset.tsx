@@ -1,14 +1,13 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { SignIn, SignWithGoogle } from "../reducks/users/operations";
+import { resetPassword } from "../reducks/users/operations";
 import styled from "styled-components";
 import { TextInput, Button, TextLink } from "./UIkit";
 import { push } from "connected-react-router";
 
-const Login: React.FC = () => {
+const Reset: React.FC = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const inputEmail = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,44 +16,23 @@ const Login: React.FC = () => {
     [setEmail]
   );
 
-  const inputPassword = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value);
-    },
-    [setPassword]
-  );
-
   return (
     <SigninContainer>
-      <h2 className="login-title">Login</h2>
-      <Button
-        label={"Login with Google"}
-        action={() => dispatch(SignWithGoogle())}
-      />
-      <p className="separator-text">or</p>
+      <h2 className="login-title">Reset Password</h2>
       <TextInput
         label={"email"}
         value={email}
         onChange={inputEmail}
       />
-      <TextInput
-        label={"password"}
-        type={"password"}
-        value={password}
-        onChange={inputPassword}
-      />
       <Button
-        label={"Login"}
-        action={() => dispatch(SignIn(email, password))}
+        label={"Reset Password"}
+        action={() => dispatch(resetPassword(email))}
       />
       <div className="sub-menu">
+        <TextLink text={""} action={() => alert("forget")} />
         <TextLink
-          text={"Forgot Password"}
-          action={() => dispatch(push("/reset"))}
-        />
-        <TextLink
-          text={"Create Account"}
-          action={() => dispatch(push("/signup"))}
+          text={"Back to SignIn"}
+          action={() => dispatch(push("/signin"))}
         />
       </div>
     </SigninContainer>
@@ -81,4 +59,4 @@ const SigninContainer = styled.div`
   }
 `;
 
-export default Login;
+export default Reset;
