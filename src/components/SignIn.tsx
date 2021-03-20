@@ -29,7 +29,8 @@ const Login: React.FC = () => {
       <h2 className="login-title">Login</h2>
       <Button
         label={"Login with Google"}
-        action={() => dispatch(SignWithGoogle())}
+        onClick={() => dispatch(SignWithGoogle())}
+        color={"white"}
       />
       <p className="separator-text">or</p>
       <TextInput
@@ -45,7 +46,8 @@ const Login: React.FC = () => {
       />
       <Button
         label={"Login"}
-        action={() => dispatch(SignIn(email, password))}
+        onClick={() => dispatch(SignIn(email, password))}
+        color={"white"}
       />
       <div className="sub-menu">
         <TextLink

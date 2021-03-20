@@ -127,18 +127,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-input[type="text"],
-input[type="password"] {
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
-  outline: none;
-}
 button {
   outline: none;
 }
-
 * {
   box-sizing: border-box;
 }

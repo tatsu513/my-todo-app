@@ -1,46 +1,51 @@
 import React from "react";
 import styled from "styled-components";
+import { TextField } from "@material-ui/core";
 
 type Props = {
   label: string;
   value: string;
   type?: string;
-  onChange: Function;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const TextInput: React.FC<Props> = (props) => {
   return (
-    <InputWrap>
-      <Input
-        type={props.type ? props.type : "text"}
-        placeholder={props.label}
-        value={props.value}
-        onChange={(event) => props.onChange(event)}
-      />
-    </InputWrap>
+    <StyledTextField
+      fullWidth={true}
+      label={props.label}
+      margin="dense"
+      multiline={false}
+      required={true}
+      rows={0}
+      value={props.value}
+      variant="outlined"
+      type={props.type ? props.type : "text"}
+      onChange={props.onChange}
+    />
   );
 };
 
-const InputWrap = styled.div`
-  margin-bottom: 16px;
-  width: 100%;
-  position: relative;
-`;
-
-const Input = styled.input`
-  height: 40px;
-  width: 100%;
-  caret-color: "#fff";
-  color: #fff;
-  &[type="text"],
-  &[type="password"] {
-    padding: 0 24px;
-    border: 1px solid #fff;
+const StyledTextField = styled(TextField)`
+  .MuiOutlinedInput-root {
     border-radius: 20px;
+    &.Mui-focused .MuiOutlinedInput-notchedOutline,
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border: 1px solid #fff;
+    }
   }
-  &::placeholder {
+  .MuiInputBase-root {
+    color: #fff;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #fff;
+  }
+  .MuiFormLabel-root {
     color: #fff;
     opacity: 0.5;
+    &.Mui-focused {
+      color: #fff;
+    }
   }
 `;
 
