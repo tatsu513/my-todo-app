@@ -6,16 +6,17 @@ export const theme = createMuiTheme({
   palette: {
     text: {
       primary: "#585858",
+      secondary: "#AEAEAE",
     },
     primary: {
-      light: "#fff",
-      main: "#4dd0e1",
-      dark: "#009faf",
+      light: "#F2FFFC",
+      main: "#55AE99",
+      dark: "#3D7B6C",
       contrastText: "#000",
     },
     secondary: {
       light: "#ffff81",
-      main: "#ffd54f",
+      main: "#E654A3",
       dark: "#c8a415",
       contrastText: "#000",
     },
@@ -30,6 +31,7 @@ export const theme = createMuiTheme({
       700: "#616161",
       800: "#424242",
       900: "#212121",
+      line: "#cecece",
       A100: "#d5d5d5",
       A200: "#aaaaaa",
       A400: "#303030",

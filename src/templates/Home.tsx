@@ -1,7 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserId, getUserName } from "../reducks/users/selectore";
-import { signOut } from "../reducks/users/operations";
+import { SideMenu, ToDoBody } from "../components/index";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -9,13 +10,29 @@ const Home: React.FC = () => {
   const uid = getUserId(selector);
   const username = getUserName(selector);
   return (
-    <div>
-      <h2>ホームー</h2>
-      <p>uid：{uid}</p>
-      <p>username：{username}</p>
-      <button onClick={() => dispatch(signOut())}>Sign Out</button>
-    </div>
+    <Container>
+      <h2 className="title">{username}さんのタスク</h2>
+      <ToDoWrapper>
+        <SideMenu />
+        <ToDoBody />
+      </ToDoWrapper>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  .title {
+    margin: 24px 0 32px;
+    font-size: 20px;
+  }
+`;
+
+const ToDoWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`;
 
 export default Home;

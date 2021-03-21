@@ -9,7 +9,7 @@ type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const TextInput: React.FC<Props> = (props) => {
+const AccountTextInput: React.FC<Props> = (props) => {
   return (
     <StyledTextField
       fullWidth={true}
@@ -49,4 +49,4 @@ const StyledTextField = styled(TextField)`
   }
 `;
 
-export default TextInput;
+export default AccountTextInput;

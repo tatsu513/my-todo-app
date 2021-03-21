@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { SignIn, SignWithGoogle } from "../reducks/users/operations";
 import styled from "styled-components";
-import { TextInput, Button, TextLink } from "./UIkit";
+import { AccountTextInput, Button, TextLink } from "./UIkit";
 import { push } from "connected-react-router";
 
 const Login: React.FC = () => {
@@ -33,12 +33,12 @@ const Login: React.FC = () => {
         color={"white"}
       />
       <p className="separator-text">or</p>
-      <TextInput
+      <AccountTextInput
         label={"email"}
         value={email}
         onChange={inputEmail}
       />
-      <TextInput
+      <AccountTextInput
         label={"password"}
         type={"password"}
         value={password}

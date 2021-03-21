@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../reducks/users/operations";
 import styled from "styled-components";
-import { TextInput, Button, TextLink } from "./UIkit";
+import { AccountTextInput, Button, TextLink } from "./UIkit";
 import { push } from "connected-react-router";
 
 const Reset: React.FC = () => {
@@ -19,14 +19,14 @@ const Reset: React.FC = () => {
   return (
     <SigninContainer>
       <h2 className="login-title">Reset Password</h2>
-      <TextInput
+      <AccountTextInput
         label={"email"}
         value={email}
         onChange={inputEmail}
       />
       <Button
         label={"Reset Password"}
-        action={() => dispatch(resetPassword(email))}
+        onClick={() => dispatch(resetPassword(email))}
       />
       <div className="sub-menu">
         <TextLink text={""} action={() => alert("forget")} />

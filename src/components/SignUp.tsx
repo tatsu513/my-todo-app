@@ -2,7 +2,11 @@ import { push } from "connected-react-router";
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { Button, TextInput, TextLink } from "../components/UIkit";
+import {
+  Button,
+  AccountTextInput,
+  TextLink,
+} from "../components/UIkit";
 import { signup } from "../reducks/users/operations";
 
 const SignUp: React.FC = () => {
@@ -43,23 +47,23 @@ const SignUp: React.FC = () => {
   return (
     <SignupContainer>
       <h2 className="title">SignUp</h2>
-      <TextInput
+      <AccountTextInput
         label={"username"}
         value={username}
         onChange={inputUsername}
       />
-      <TextInput
+      <AccountTextInput
         label={"email"}
         value={email}
         onChange={inputEmail}
       />
-      <TextInput
+      <AccountTextInput
         label={"password"}
         type={"password"}
         value={password}
         onChange={inputPassword}
       />
-      <TextInput
+      <AccountTextInput
         label={"password"}
         type={"password"}
         value={confirmPassword}
@@ -67,9 +71,10 @@ const SignUp: React.FC = () => {
       />
       <Button
         label={"SignUp"}
-        action={() =>
+        onClick={() =>
           dispatch(signup(username, email, password, confirmPassword))
         }
+        color={"white"}
       />
       <div className="sub-menu">
         <TextLink text={""} action={() => alert("いいい")} />
