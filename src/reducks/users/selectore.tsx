@@ -5,6 +5,11 @@ const usersSelector = (state: any): usersState => {
   return state.users;
 };
 
+export const getCategories = createSelector(
+  [usersSelector],
+  (state) => state.categories
+);
+
 export const getIsSignedIn = createSelector(
   [usersSelector],
   (state) => state.isSignedIn

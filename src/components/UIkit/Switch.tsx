@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch } from "@material-ui/core/";
-import styled from "styled-components";
 
 type Props = {
   checked: boolean;
@@ -16,7 +15,5 @@ const LocalSwitch: React.FC<Props> = (props) => {
     />
   );
 };
-
-const CustomSwitch = styled(Switch)``;
 
 export default LocalSwitch;

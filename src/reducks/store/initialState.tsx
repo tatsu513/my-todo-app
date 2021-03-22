@@ -4,6 +4,13 @@ export const initialState = {
     uid: "",
     userName: "",
     role: "",
+    categories: [],
+  },
+  todo: {
+    name: "タスク",
+    limitDate: "",
+    category: "",
+    memo: "",
   },
 };
 

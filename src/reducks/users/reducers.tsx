@@ -11,6 +11,16 @@ export const UsersReducer = (
   action: Action
 ) => {
   switch (action.type) {
+    case Actions.ADD_CATEGORY:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case Actions.FEATCH_CATEGORIES:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case Actions.SIGN_IN:
       return {
         ...state,

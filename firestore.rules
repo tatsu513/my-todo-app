@@ -7,6 +7,9 @@ service cloud.firestore {
       allow update: if request.auth.uid == userId;
       allow delete: if request.auth.uid == userId;
 
+      match /categories/{categoryId} {
+        allow read, write: if request.auth.uid == userId;
+      }
     }
   }
 }

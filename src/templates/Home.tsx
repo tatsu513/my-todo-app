@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserId, getUserName } from "../reducks/users/selectore";
+import { getUserName } from "../reducks/users/selectore";
 import { SideMenu, ToDoBody } from "../components/index";
+import { fetchCategories } from "../reducks/users/operations";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const uid = getUserId(selector);
   const username = getUserName(selector);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Container>
       <h2 className="title">{username}さんのタスク</h2>

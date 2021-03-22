@@ -1,23 +1,53 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import { AddCategoryModal } from "./modal/index";
+import { getCategories } from "../reducks/users/selectore";
+import { useSelector } from "react-redux";
 
-const SideMenu = () => {
+const SideMenu: React.FC = () => {
+  const selector = useSelector((state) => state);
+  const categories = getCategories(selector);
+  const [
+    isOpenAddCategoryModal,
+    setIsOpenAddCategoryModal,
+  ] = useState(false);
+
+  const openAddCategoryModal = useCallback(() => {
+    setIsOpenAddCategoryModal(true);
+  }, []);
+
+  const closeAddCategoryModal = useCallback(() => {
+    setIsOpenAddCategoryModal(false);
+  }, []);
+
   return (
     <SideBarWrapper>
       <MenuTitle className="menu-text">タスクの絞り込み</MenuTitle>
       <SideMunuContainer>
         <ul className="menu">
-          <li className="menu-item">おおお</li>
-          <li className="menu-item">いいい</li>
+          {categories.length > 0 &&
+            categories.map((category) => (
+              <li key={category.id} className="menu-item">
+                {category.name}
+              </li>
+            ))}
         </ul>
       </SideMunuContainer>
       <AddCategory>
-        <Button color="primary" startIcon={<AddIcon />}>
+        <Button
+          color="primary"
+          startIcon={<AddIcon />}
+          onClick={openAddCategoryModal}
+        >
           カテゴリ追加
         </Button>
       </AddCategory>
+      <AddCategoryModal
+        isOpen={isOpenAddCategoryModal}
+        onClose={closeAddCategoryModal}
+      />
     </SideBarWrapper>
   );
 };

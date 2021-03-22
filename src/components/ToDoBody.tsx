@@ -9,10 +9,6 @@ import { AddToDoModal } from "../components/modal/";
 const ToDoBody = () => {
   const [state, setState] = useState(true);
   const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
-  const [name, setName] = useState("");
-  const [limitDate, setLimitDate] = useState("");
-  const [category, setCategory] = useState("");
-  const [memo, setMemo] = useState("");
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>

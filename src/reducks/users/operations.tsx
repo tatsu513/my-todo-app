@@ -1,7 +1,57 @@
-import { signInAction, signOutAction } from "./actions";
+import {
+  fetchCategoriesAction,
+  signInAction,
+  signOutAction,
+} from "./actions";
 import { push } from "connected-react-router";
 import { auth, db, FirebaseTimetamp, provider } from "../../firebase";
 import { Dispatch } from "redux";
+
+export const addCategory = (name: string) => {
+  return async (dispatch: Dispatch, getState: any) => {
+    const timeStamp = FirebaseTimetamp.now();
+    if (name === "") {
+      alert("カテゴリ名称が空です。");
+      return false;
+    } else {
+      const uid = getState().users.uid;
+      const categoryRef = db
+        .collection("users")
+        .doc(uid)
+        .collection("categories")
+        .doc();
+      const addData = {
+        id: categoryRef.id,
+        name: name,
+        created_at: timeStamp,
+        update_at: timeStamp,
+      };
+      categoryRef.set(addData);
+    }
+  };
+};
+
+export const fetchCategories = () => {
+  return async (dispatch: Dispatch, getState: any) => {
+    const uid = getState().users.uid;
+    db.collection("users")
+      .doc(uid)
+      .collection("categories")
+      .orderBy("created_at", "asc")
+      .get()
+      .then((snapshots) => {
+        const list: { id: string; name: string }[] = [];
+        snapshots.forEach((snapshot) => {
+          const data = snapshot.data();
+          list.push({
+            id: data.id,
+            name: data.name,
+          });
+        });
+        dispatch(fetchCategoriesAction(list));
+      });
+  };
+};
 
 export const listenAuthState = () => {
   return async (dispatch: Dispatch) => {
@@ -20,6 +70,7 @@ export const listenAuthState = () => {
                 role: "customer",
                 uid: data!.uid,
                 userName: data!.username,
+                categories: [],
               })
             );
 
@@ -58,6 +109,7 @@ export const SignIn = (email: string, password: string) => {
                   role: data!.role,
                   uid: data!.uid,
                   userName: data!.username,
+                  categories: [],
                 })
               );
 
@@ -83,6 +135,7 @@ export const SignWithGoogle = () => {
               role: "customer",
               uid: user.uid,
               userName: user.displayName || "",
+              categories: [],
             })
           );
           const userInitialData = {
