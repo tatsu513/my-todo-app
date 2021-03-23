@@ -5,8 +5,16 @@ import { SecondaryChip, Switch } from "../components/UIkit/index";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { AddToDoModal } from "../components/modal/";
+import { useSelector } from "react-redux";
+import { getTodoList } from "../reducks/todos/selectore";
+import { yyyymmdd } from "../plugins/dayjs";
+import { getCategories } from "../reducks/users/selectore";
 
 const ToDoBody = () => {
+  const selector = useSelector((state) => state);
+  const todoList = getTodoList(selector);
+  const categories = getCategories(selector);
+
   const [state, setState] = useState(true);
   const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
 
@@ -24,6 +32,13 @@ const ToDoBody = () => {
     setIsOpenAddTodoModal(false);
   }, []);
 
+  const displayCategory = (id: string): string => {
+    const category = categories.find(
+      (category) => category.id === id
+    );
+    return category ? category.name : "";
+  };
+
   return (
     <ToDoBodyWrapper>
       <Controller>
@@ -33,30 +48,37 @@ const ToDoBody = () => {
         />
       </Controller>
       <ul>
-        <ToDoItem>
-          <div className="switch-erea">
-            <Switch
-              checked={state}
-              onChange={(event) => handleChange(event)}
-            />
-          </div>
-          <div className="content-erea">
-            <div className="content-title">夕飯の買い物</div>
-            <div className="content-date">
-              登録日：2020-03-30／期限日：2020-03-30
-            </div>
-            <ul className="content-category">
-              <li>
-                <SecondaryChip label={"カテゴリ"} />
-              </li>
-            </ul>
-          </div>
-          <div className="delete-erea">
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
-          </div>
-        </ToDoItem>
+        {todoList.length > 0 &&
+          todoList.map((todo) => (
+            <ToDoItem key={todo.id}>
+              <div className="switch-erea">
+                <Switch
+                  checked={state}
+                  onChange={(event) => handleChange(event)}
+                />
+              </div>
+              <div className="content-erea">
+                <div className="content-title">{todo.name}</div>
+                <div className="content-date">
+                  登録日：{yyyymmdd(todo.createdAt.toDate())}
+                  ／期限日：
+                  {todo.limitDate ? yyyymmdd(todo.limitDate) : "ー"}
+                </div>
+                <ul className="content-category">
+                  <li>
+                    <SecondaryChip
+                      label={displayCategory(todo.category)}
+                    />
+                  </li>
+                </ul>
+              </div>
+              <div className="delete-erea">
+                <IconButton>
+                  <DeleteIcon />
+                </IconButton>
+              </div>
+            </ToDoItem>
+          ))}
       </ul>
       <AddToDoModal
         isOpen={isOpenAddTodoModal}

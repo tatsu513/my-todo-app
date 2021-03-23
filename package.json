@@ -17,6 +17,7 @@
     "@types/react-router": "^5.1.12",
     "connected-react-router": "^6.9.1",
     "date-fns": "^2.19.0",
+    "dayjs": "^1.10.4",
     "firebase": "^8.3.0",
     "history": "^4.10.1",
     "polished": "^4.1.1",

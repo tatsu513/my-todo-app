@@ -11,5 +11,8 @@ service cloud.firestore {
         allow read, write: if request.auth.uid == userId;
       }
     }
+    match /todos/{todosId} {
+      allow read, write: if request.auth.uid != null;
+    }
   }
 }

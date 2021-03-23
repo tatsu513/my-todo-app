@@ -5,7 +5,7 @@ const todoSelector = (state: any): todoState => {
   return state.todo;
 };
 
-export const getName = createSelector(
+export const getTodoList = createSelector(
   [todoSelector],
-  (state) => state.name
+  (state) => state.todoList
 );

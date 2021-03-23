@@ -1,14 +1,21 @@
-import { todoState } from "../store/types";
+import { Todo } from "../store/types";
 
 export const CREATE_TODO = "CREATE_TODO";
-export const createTodoAction = (todo: todoState) => {
+export const createTodoAction = (todos: Todo) => {
   return {
     type: "CREATE_TODO",
     payload: {
-      name: todo.name,
-      limitDate: todo.limitDate,
-      category: todo.category,
-      memo: todo.memo,
+      todos: todos,
+    },
+  };
+};
+
+export const FETCH_TODOS = "FETCH_TODOS";
+export const fetchTodosAction = (todos: Todo[]) => {
+  return {
+    type: "CREATE_TODO",
+    payload: {
+      todoList: todos,
     },
   };
 };

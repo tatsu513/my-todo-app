@@ -7,11 +7,16 @@ type Action = {
 };
 
 export const ToDoesReducer = (
-  state = initialState.todo,
+  state = initialState.todos,
   action: Action
 ) => {
   switch (action.type) {
     case Actions.CREATE_TODO:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case Actions.FETCH_TODOS:
       return {
         ...state,
         ...action.payload,

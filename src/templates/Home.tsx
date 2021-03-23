@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserName } from "../reducks/users/selectore";
 import { SideMenu, ToDoBody } from "../components/index";
 import { fetchCategories } from "../reducks/users/operations";
+import { fetchTodos } from "../reducks/todos/operations";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchCategories());
+    dispatch(fetchTodos());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

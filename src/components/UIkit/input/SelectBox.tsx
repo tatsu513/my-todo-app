@@ -11,7 +11,7 @@ type Props = {
   selectBoxId: string;
   value: string;
   items: {
-    value: number;
+    id: string;
     name: string;
   }[];
   onChange:
@@ -38,7 +38,7 @@ const SelectBox: React.FC<Props> = (props) => {
         {props.items.length > 0 &&
           props.items.map((item) => {
             return (
-              <MenuItem key={item.name} value={item.value}>
+              <MenuItem key={item.name} value={item.id}>
                 {item.name}
               </MenuItem>
             );

@@ -9,7 +9,9 @@ import styled from "styled-components";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
 type Props = {
+  id: string;
   value: Date;
+  label: string;
   onChange: (
     date: MaterialUiPickersDate,
     value?: string | null | undefined
@@ -24,8 +26,8 @@ const InputDatePicker: React.FC<Props> = (props) => {
         variant="inline"
         format="yyyy/MM/dd"
         margin="normal"
-        id="date-picker-inline"
-        label="Date picker inline"
+        id={props.id}
+        label={props.label}
         value={props.value}
         onChange={props.onChange}
         KeyboardButtonProps={{

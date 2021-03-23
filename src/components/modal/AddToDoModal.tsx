@@ -10,8 +10,9 @@ import {
 } from "../../components/UIkit/index";
 import { InputText } from "../UIkit/index";
 import { createTodo } from "../../reducks/todos/operations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SecondaryButton } from "../UIkit/index";
+import { getCategories } from "../../reducks/users/selectore";
 
 type Props = {
   isOpen: boolean;
@@ -23,16 +24,13 @@ type Props = {
 const AddToDoModal: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
 
+  const selector = useSelector((state) => state);
+  const categories = getCategories(selector);
+
   const [name, setName] = useState("");
   const [limitDate, setLimitDate] = useState(new Date());
-  const [category, setCategory] = useState("10");
+  const [category, setCategory] = useState("");
   const [memo, setMemo] = useState("");
-
-  const categories = [
-    { value: 10, name: "Ten" },
-    { value: 20, name: "Twenty" },
-    { value: 30, name: "Thirty" },
-  ];
 
   const InputName = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +58,11 @@ const AddToDoModal: React.FC<Props> = (props) => {
     []
   );
 
+  const createTodoSubmit = useCallback(() => {
+    console.log(name);
+    dispatch(createTodo(name, limitDate, category, memo));
+  }, [dispatch, name, limitDate, category, memo]);
+
   return (
     <div>
       <Dialog
@@ -85,7 +88,9 @@ const AddToDoModal: React.FC<Props> = (props) => {
             onChange={InputName}
           />
           <InputDatePicker
+            id={"limit-date"}
             value={limitDate}
+            label={"期限日"}
             onChange={InputLimitDate}
           />
           <SelectBox
@@ -111,9 +116,7 @@ const AddToDoModal: React.FC<Props> = (props) => {
           <SecondaryButton
             label={"TODO追加"}
             color={"primary"}
-            onClick={() =>
-              dispatch(createTodo(name, limitDate, category, memo))
-            }
+            onClick={createTodoSubmit}
           />
         </DialogActions>
       </Dialog>
