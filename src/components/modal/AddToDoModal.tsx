@@ -9,7 +9,10 @@ import {
   SelectBox,
 } from "../../components/UIkit/index";
 import { InputText } from "../UIkit/index";
-import { createTodo } from "../../reducks/todos/operations";
+import {
+  createTodo,
+  fetchTodos,
+} from "../../reducks/todos/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { SecondaryButton } from "../UIkit/index";
 import { getCategories } from "../../reducks/users/selectore";
@@ -58,10 +61,18 @@ const AddToDoModal: React.FC<Props> = (props) => {
     []
   );
 
-  const createTodoSubmit = useCallback(() => {
-    console.log(name);
-    dispatch(createTodo(name, limitDate, category, memo));
-  }, [dispatch, name, limitDate, category, memo]);
+  const createTodoSubmit = useCallback(
+    (event) => {
+      dispatch(createTodo(name, limitDate, category, memo));
+      dispatch(fetchTodos());
+      setName("");
+      setLimitDate(new Date());
+      setCategory("");
+      setMemo("");
+      props.onClose(event);
+    },
+    [dispatch, name, limitDate, category, memo, props]
+  );
 
   return (
     <div>
@@ -85,6 +96,7 @@ const AddToDoModal: React.FC<Props> = (props) => {
             fullWidth={true}
             multiline={false}
             rows={0}
+            autoFocus={true}
             onChange={InputName}
           />
           <InputDatePicker
@@ -109,6 +121,7 @@ const AddToDoModal: React.FC<Props> = (props) => {
             fullWidth={true}
             multiline={true}
             rows={4}
+            autoFocus={false}
             onChange={InputMemo}
           />
         </DialogContent>

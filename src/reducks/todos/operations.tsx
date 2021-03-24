@@ -1,4 +1,4 @@
-import { fetchTodosAction } from "./actions";
+import { fetchTodosAction, toggleActiveStateAction } from "./actions";
 import { db, FirebaseTimetamp } from "../../firebase";
 import { Dispatch } from "redux";
 import { Todo } from "../store/types";
@@ -31,6 +31,18 @@ export const createTodo = (
   };
 };
 
+export const deleteTodo = (id: string) => {
+  return async () => {
+    db.collection("todos")
+      .doc(id)
+      .delete()
+      .then(() => {
+        fetchTodos();
+        alert("削除しました");
+      });
+  };
+};
+
 export const fetchTodos = () => {
   return async (dispatch: Dispatch) => {
     db.collection("todos")
@@ -51,6 +63,21 @@ export const fetchTodos = () => {
           });
         });
         dispatch(fetchTodosAction(list));
+      });
+  };
+};
+
+export const toggleActiveState = (id: string, state: boolean) => {
+  return async (dispatch: Dispatch, getState: any) => {
+    const data = { active_state: state };
+    db.collection("todos")
+      .doc(id)
+      .set(data, { merge: true })
+      .then(() => {
+        const todoList: Todo[] = getState().todo.todoList;
+        const index = todoList.findIndex((todo) => todo.id === id);
+        todoList[index].activeState = state;
+        dispatch(toggleActiveStateAction(todoList));
       });
   };
 };

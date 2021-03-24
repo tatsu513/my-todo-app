@@ -15,13 +15,14 @@ export const addCategory = (name: string) => {
       return false;
     } else {
       const uid = getState().users.uid;
+      const categoryLength = getState().users.categories.length;
       const categoryRef = db
         .collection("users")
         .doc(uid)
         .collection("categories")
         .doc();
       const addData = {
-        id: categoryRef.id,
+        id: categoryLength + 1,
         name: name,
         created_at: timeStamp,
         update_at: timeStamp,

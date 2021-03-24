@@ -32,6 +32,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1024px;
   margin: 0 auto;
+  padding: 0 16px;
   .title {
     margin: 24px 0 32px;
     font-size: 20px;

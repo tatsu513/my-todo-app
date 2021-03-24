@@ -21,6 +21,11 @@ export const ToDoesReducer = (
         ...state,
         ...action.payload,
       };
+    case Actions.TOGGLE_ACTIVE_STATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }

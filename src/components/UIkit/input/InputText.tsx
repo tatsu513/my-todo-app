@@ -9,13 +9,14 @@ type Props = {
   fullWidth: boolean;
   multiline: boolean;
   rows: number;
+  autoFocus: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const InputText: React.FC<Props> = (props) => {
   return (
     <TextField
-      autoFocus
+      autoFocus={props.autoFocus}
       margin="dense"
       id={props.id}
       label={props.label}

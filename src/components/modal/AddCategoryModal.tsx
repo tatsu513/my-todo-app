@@ -5,7 +5,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { InputText } from "../UIkit/index";
-import { addCategory } from "../../reducks/users/operations";
+import {
+  addCategory,
+  fetchCategories,
+} from "../../reducks/users/operations";
 import { useDispatch } from "react-redux";
 import { SecondaryButton } from "../UIkit/index";
 
@@ -31,6 +34,7 @@ const AddToDoModal: React.FC<Props> = (props) => {
     (event) => {
       dispatch(addCategory(name));
       setName("");
+      dispatch(fetchCategories());
       props.onClose(event);
     },
     [dispatch, name, props]
@@ -51,6 +55,7 @@ const AddToDoModal: React.FC<Props> = (props) => {
             追加するカテゴリの名称を入力してください。
           </DialogContentText>
           <InputText
+            autoFocus={true}
             id={"category-name"}
             label={"カテゴリ名"}
             type={"text"}

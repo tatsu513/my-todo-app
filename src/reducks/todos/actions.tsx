@@ -19,3 +19,13 @@ export const fetchTodosAction = (todos: Todo[]) => {
     },
   };
 };
+
+export const TOGGLE_ACTIVE_STATE = "TOGGLE_ACTIVE_STATE";
+export const toggleActiveStateAction = (todos: Todo[]) => {
+  return {
+    type: "TOGGLE_ACTIVE_STATE",
+    payload: {
+      todoList: todos,
+    },
+  };
+};
