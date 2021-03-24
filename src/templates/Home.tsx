@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserName } from "../reducks/users/selectore";
@@ -10,6 +10,11 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const username = getUserName(selector);
+  const [filterCategoryId, setFilterCategoryId] = useState(0);
+
+  const filterCategory = useCallback((id) => {
+    setFilterCategoryId(id);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -21,8 +26,8 @@ const Home: React.FC = () => {
     <Container>
       <h2 className="title">{username}さんのタスク</h2>
       <ToDoWrapper>
-        <SideMenu />
-        <ToDoBody />
+        <SideMenu onClick={filterCategory} />
+        <ToDoBody categoryId={filterCategoryId} />
       </ToDoWrapper>
     </Container>
   );

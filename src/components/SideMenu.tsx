@@ -6,7 +6,11 @@ import { AddCategoryModal } from "./modal/index";
 import { getCategories } from "../reducks/users/selectore";
 import { useSelector } from "react-redux";
 
-const SideMenu: React.FC = () => {
+type Props = {
+  onClick: (id: string | number) => void;
+};
+
+const SideMenu: React.FC<Props> = ({ onClick }) => {
   const selector = useSelector((state) => state);
   const categories = getCategories(selector);
   const [
@@ -27,9 +31,16 @@ const SideMenu: React.FC = () => {
       <MenuTitle className="menu-text">タスクの絞り込み</MenuTitle>
       <SideMunuContainer>
         <ul className="menu">
+          <li className="menu-item" onClick={() => onClick(0)}>
+            すべて
+          </li>
           {categories.length > 0 &&
             categories.map((category) => (
-              <li key={category.id} className="menu-item">
+              <li
+                key={category.id}
+                className="menu-item"
+                onClick={() => onClick(category.id)}
+              >
                 {category.name}
               </li>
             ))}

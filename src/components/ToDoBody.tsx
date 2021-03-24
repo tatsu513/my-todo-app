@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { PrimaryButton } from "../components/UIkit/index";
 import styled from "styled-components";
 import { AddToDoModal } from "../components/modal/";
@@ -6,9 +6,14 @@ import { useSelector } from "react-redux";
 import { getTodoList } from "../reducks/todos/selectore";
 import { ToDoItem } from "./index";
 
-const ToDoBody = () => {
+type Props = {
+  categoryId: string | number;
+};
+
+const ToDoBody: React.FC<Props> = ({ categoryId }) => {
   const selector = useSelector((state) => state);
   const todoList = getTodoList(selector);
+  const [filteredList, setFilteredList] = useState(todoList);
 
   const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
 
@@ -20,6 +25,16 @@ const ToDoBody = () => {
     setIsOpenAddTodoModal(false);
   }, []);
 
+  useEffect(() => {
+    if (categoryId === 0 || !categoryId) {
+      setFilteredList(todoList);
+    } else {
+      setFilteredList(
+        todoList.filter((todo) => todo.category === categoryId)
+      );
+    }
+  }, [categoryId, todoList]);
+
   return (
     <ToDoBodyWrapper>
       <Controller>
@@ -29,8 +44,8 @@ const ToDoBody = () => {
         />
       </Controller>
       <ul>
-        {todoList.length > 0 &&
-          todoList.map((todo) => (
+        {filteredList.length > 0 &&
+          filteredList.map((todo) => (
             <ToDoItem key={todo.id} todo={todo} />
           ))}
       </ul>
