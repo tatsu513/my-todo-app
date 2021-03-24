@@ -5,14 +5,7 @@ import backgroundImage from "../assets/images/login-back.png";
 
 const Account: React.FC = () => {
   const pathname = window.location.pathname;
-  const [isSignIn, setIsSingIn] = useState(true);
   const [path, setPath] = useState("signin");
-
-  useEffect(() => {
-    setIsSingIn(
-      pathname.split("/")[1].match(/^signin(#)?/) ? true : false
-    );
-  }, [pathname]);
 
   useEffect(() => {
     setPath(pathname.split("/")[1].replace("#", ""));
